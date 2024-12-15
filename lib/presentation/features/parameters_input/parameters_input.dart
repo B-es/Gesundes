@@ -5,9 +5,15 @@ import 'package:gesundes/presentation/common/button.dart';
 import 'package:gesundes/presentation/common/dropdown.dart';
 import 'package:gesundes/presentation/common/input.dart';
 import 'package:gesundes/presentation/common/multiply_dropdown.dart';
+import 'package:gesundes/presentation/features/main_screen/main_screen.dart';
 
 class ParametersInput extends StatelessWidget {
-  const ParametersInput({super.key});
+  const ParametersInput({
+    super.key,
+    this.withArrow = true,
+    this.toMain = false,
+  });
+  final bool withArrow, toMain;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +22,8 @@ class ParametersInput extends StatelessWidget {
     const double inputLen = 300;
     return Scaffold(
       appBar: AppBarCustom(
+        toolbarHeight: 100,
+        withArrow: withArrow,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(10),
           child: SizedBox(
@@ -128,10 +136,16 @@ class ParametersInput extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const Button(
+              Button(
                 text: "Сохранить",
                 width: inputLen,
                 height: 50,
+                onTap: () {
+                  if (toMain) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) => const MainScreen()));
+                  }
+                },
               ),
             ],
           ),

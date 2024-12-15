@@ -7,28 +7,31 @@ class Label extends StatelessWidget {
     this.width,
     this.height,
     this.align,
+    this.padding,
   });
 
   final String text;
   final double? width, height;
   final Alignment? align;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     final BoxDecoration decoration = BoxDecoration(
-      borderRadius: const BorderRadius.all(Radius.circular(20.38)),
+      borderRadius: const BorderRadius.all(Radius.circular(15)),
       border: Border.all(color: Theme.of(context).primaryColor, width: 2),
     );
 
     return Container(
-      padding: const EdgeInsets.all(10),
       decoration: decoration,
       width: width,
       height: height,
       alignment: align,
+      padding: padding,
       child: Text(
         style: Theme.of(context).textTheme.bodyMedium,
         text,
+        textAlign: TextAlign.center,
       ),
     );
   }

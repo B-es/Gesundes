@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gesundes/presentation/common/button.dart';
 import 'package:gesundes/presentation/common/input.dart';
 import 'package:gesundes/presentation/features/auth/widgets/oauth2.dart';
+import 'package:gesundes/presentation/features/main_screen/main_screen.dart';
+import 'package:gesundes/presentation/features/parameters_input/parameters_input.dart';
 
 class Registration extends StatelessWidget {
   const Registration({super.key});
@@ -52,10 +54,17 @@ class Registration extends StatelessWidget {
         const SizedBox(
           height: 40,
         ),
-        const Button(
+        Button(
           text: "Зарегистрировать",
           width: inputLen,
           height: 50,
+          onTap: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => const ParametersInput(
+                        withArrow: false,
+                        toMain: true,
+                      ))),
         ),
         const SizedBox(
           height: 30,

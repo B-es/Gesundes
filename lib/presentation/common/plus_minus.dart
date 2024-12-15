@@ -1,11 +1,14 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gesundes/presentation/common/input.dart';
 
 class PlusMinus extends StatefulWidget {
-  const PlusMinus({super.key, required this.initValue});
+  const PlusMinus({super.key, required this.initValue, required this.notif});
 
   final int initValue;
+  final ValueNotifier<int> notif;
 
   @override
   State<PlusMinus> createState() => _PlusMinusState();
@@ -71,13 +74,15 @@ class _PlusMinusState extends State<PlusMinus> {
     setState(() {
       _controller.text = (int.parse(_controller.text) + 1).toString();
     });
+    widget.notif.value = int.parse(_controller.text);
   }
 
   void sub() {
-    if (_controller.text != '0') {
+    if (_controller.text != widget.initValue.toString()) {
       setState(() {
         _controller.text = (int.parse(_controller.text) - 1).toString();
       });
+      widget.notif.value = int.parse(_controller.text);
     }
   }
 }

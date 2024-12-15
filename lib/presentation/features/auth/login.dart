@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gesundes/presentation/features/main_screen/main_screen.dart';
 
 import '../../common/button.dart';
 import '../../common/input.dart';
@@ -40,10 +41,12 @@ class Login extends StatelessWidget {
         const SizedBox(
           height: 40,
         ),
-        const Button(
+        Button(
           text: "Войти",
           width: inputLen,
           height: 50,
+          onTap: () => Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => const MainScreen())),
         ),
         const SizedBox(
           height: 30,

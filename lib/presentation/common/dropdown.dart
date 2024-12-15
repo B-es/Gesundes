@@ -1,10 +1,21 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class DropDown extends StatefulWidget {
-  const DropDown({super.key, required this.items, required this.initValue});
+  const DropDown({
+    super.key,
+    required this.items,
+    required this.initValue,
+    this.notif,
+    this.width = 300,
+    this.height = 60,
+  });
 
   final List<String> items;
   final String initValue;
+  final double width, height;
+  final ValueNotifier<String>? notif;
 
   @override
   State<DropDown> createState() => _DropDownState();
@@ -37,8 +48,8 @@ class _DropDownState extends State<DropDown> {
 
     return Container(
       decoration: boxDecoration,
-      width: 300,
-      height: 60,
+      width: widget.width,
+      height: widget.height,
       alignment: Alignment.center,
       child: DropdownButtonFormField<String>(
         decoration: decoration,
@@ -54,6 +65,7 @@ class _DropDownState extends State<DropDown> {
         onChanged: (String? value) {
           setState(() {
             dropdownValue = value!;
+            widget.notif?.value = value;
           });
         },
         isDense: true,

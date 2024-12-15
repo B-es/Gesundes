@@ -7,12 +7,15 @@ class ChoiceButton extends StatelessWidget {
     required this.icon,
     required this.color,
     this.width,
+    this.height,
+    this.onTap,
   });
 
   final String text;
   final IconData icon;
   final Color color;
-  final double? width;
+  final Function()? onTap;
+  final double? width, height;
 
   @override
   Widget build(BuildContext context) {
@@ -20,25 +23,33 @@ class ChoiceButton extends StatelessWidget {
 
     final BoxDecoration decoration = BoxDecoration(
       borderRadius: const BorderRadius.all(Radius.circular(20.38)),
-      border: Border.all(color: Theme.of(context).primaryColor, width: 2),
+      border: Border.all(color: color, width: 2),
       color: color,
     );
 
-    return Container(
-      width: width,
-      decoration: decoration,
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Icon(icon, size: 35, color: Colors.white),
-          Text(
-            text,
-            style: themeData.primaryTextTheme.bodyMedium?.copyWith(
-              fontSize: 25,
-            ),
-          )
-        ]),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: width,
+        height: height,
+        padding: const EdgeInsets.all(8.0),
+        decoration: decoration,
+        child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(icon, size: 35, color: Colors.white),
+              Expanded(
+                child: Text(
+                  text,
+                  textAlign: TextAlign.end,
+                  softWrap: true,
+                  style: themeData.primaryTextTheme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                  ),
+                ),
+              )
+            ]),
       ),
     );
   }
